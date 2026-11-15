@@ -3,7 +3,7 @@
         xmlns:vm="using:MoleculeLab.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
         x:Class="MoleculeLab.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -15,8 +15,86 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBox Text="{Binding Greeting}"
-             HorizontalAlignment="Center"
-             VerticalAlignment="Center" />
+    <Window.Styles>
+        <Style Selector="Button.primary">
+            <Setter Property="Background" Value="#ebbe65" />
+            <Setter Property="Foreground" Value="#151515" />
+        </Style>
+        <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#ebb752" />
+            <Setter Property="Foreground" Value="#151515" />
+        </Style>
+        <Style Selector="Button.primary:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#e8ae3f" />
+            <Setter Property="Foreground" Value="#faf1de" />
+        </Style>
+        <Style Selector="TextBlock.primary">
+            <Setter Property="Foreground" Value="#151515" />
+        </Style>
+    </Window.Styles>
+
+    <Grid x:Name="MainGrid" RowDefinitions="0, *">
+        <Border Grid.Row="0"
+                Background="#151515"
+                Padding="12">
+            <!--<TextBlock Text="MoleculeLab"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#faf1de"/>
+                       -->
+        </Border>
+
+        <Border Grid.Row="1">
+            <Grid ColumnDefinitions="220,*,260">
+
+                <Border Grid.Column="0"
+                        Background="#fcd586"
+                        Padding="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="primary"
+                                   Text="TOOLS"
+                                   FontSize="20"
+                                   FontWeight="Bold"
+                                   />
+
+                        <Button Classes="primary" Content="Select" Width="100"/>
+                        <Button Classes="primary" Content="Move" Width="100"/>
+                        <Button Classes="primary" Content="Single Bond" Width="100"/>
+                        <Button Classes="primary" Content="Double Bond" Width="100"/>
+                        <Button Classes="primary" Content="Triple Bond" Width="100"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1"
+                        Background="#faf1de">
+                    <StackPanel Spacing="40">
+                    <Button x:Name="OpenPeriodicTable" Click="OpenPeriodicTable_Click" Classes="primary" Width="30" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top"><PathIcon Data="{StaticResource DropdownIcon}"/></Button>
+                <TextBlock x:Name="MoleculeCanvasText" Text="Molecule Canvas"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    </StackPanel>
+                    </Border>
+
+                <Border Grid.Column="2"
+                        Background="#fcd586"
+                        Padding="12">
+                    <StackPanel Spacing="10">
+                        <TextBlock Classes="primary"
+                                   Text="PROPERTIES"
+                                   FontSize="20"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Classes="primary" Text="Selected atom:"/>
+                        <TextBlock Classes="primary" Text="Carbon (C)"/>
+
+                        <TextBlock Classes="primary" Text="Atomic number: 6"/>
+                        <TextBlock Classes="primary" Text="Atomic mass: 12.011"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </Border>
+
+    </Grid>
 
 </Window>
