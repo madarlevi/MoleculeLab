@@ -83,11 +83,9 @@
             <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
                   RowDefinitions="*,*,*,*,*">
 
-                <!-- 1. SOR -->
                 <Viewbox Grid.Column="0" Grid.Row="0" Margin="2"><Button Content="H" Classes="periodic-atom" Tag="H" Click="AtomOption_Click"/></Viewbox>
                 <Viewbox Grid.Column="17" Grid.Row="0" Margin="2"><Button Content="He" Classes="periodic-atom" Tag="He" Click="AtomOption_Click"/></Viewbox>
 
-                <!-- 2. SOR -->
                 <Viewbox Grid.Column="0" Grid.Row="1" Margin="2"><Button Content="Li" Classes="periodic-atom" Tag="Li" Click="AtomOption_Click"/></Viewbox>
                 <Viewbox Grid.Column="1" Grid.Row="1" Margin="2"><Button Content="Be" Classes="periodic-atom" Tag="Be" Click="AtomOption_Click"/></Viewbox>
                 <Viewbox Grid.Column="12" Grid.Row="1" Margin="2"><Button Content="B" Classes="periodic-atom" Tag="B" Click="AtomOption_Click"/></Viewbox>
@@ -97,7 +95,6 @@
                 <Viewbox Grid.Column="16" Grid.Row="1" Margin="2"><Button Content="F" Classes="periodic-atom" Tag="F" Click="AtomOption_Click"/></Viewbox>
                 <Viewbox Grid.Column="17" Grid.Row="1" Margin="2"><Button Content="Ne" Classes="periodic-atom" Tag="Ne" Click="AtomOption_Click"/></Viewbox>
 
-                <!-- 3. SOR -->
                 <Viewbox Grid.Column="0" Grid.Row="2" Margin="2"><Button Content="Na" Classes="periodic-atom" Tag="Na" Click="AtomOption_Click"/></Viewbox>
                 <Viewbox Grid.Column="1" Grid.Row="2" Margin="2"><Button Content="Mg" Classes="periodic-atom" Tag="Mg" Click="AtomOption_Click"/></Viewbox>
                 <Viewbox Grid.Column="12" Grid.Row="2" Margin="2"><Button Content="Al" Classes="periodic-atom" Tag="Al" Click="AtomOption_Click"/></Viewbox>
@@ -107,45 +104,43 @@
                 <Viewbox Grid.Column="16" Grid.Row="2" Margin="2"><Button Content="Cl" Classes="periodic-atom" Tag="Cl" Click="AtomOption_Click"/></Viewbox>
                 <Viewbox Grid.Column="17" Grid.Row="2" Margin="2"><Button Content="Ar" Classes="periodic-atom" Tag="Ar" Click="AtomOption_Click"/></Viewbox>
 
-                <!-- 4. SOR: K, Ca, Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr -->
-        <Viewbox Grid.Column="0" Grid.Row="3" Margin="2"><Button Content="K" Classes="periodic-atom" Tag="K" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="1" Grid.Row="3" Margin="2"><Button Content="Ca" Classes="periodic-atom" Tag="Ca" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="2" Grid.Row="3" Margin="2"><Button Content="Sc" Classes="periodic-atom" Tag="Sc" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="3" Grid.Row="3" Margin="2"><Button Content="Ti" Classes="periodic-atom" Tag="Ti" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="4" Grid.Row="3" Margin="2"><Button Content="V" Classes="periodic-atom" Tag="V" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="5" Grid.Row="3" Margin="2"><Button Content="Cr" Classes="periodic-atom" Tag="Cr" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="6" Grid.Row="3" Margin="2"><Button Content="Mn" Classes="periodic-atom" Tag="Mn" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="7" Grid.Row="3" Margin="2"><Button Content="Fe" Classes="periodic-atom" Tag="Fe" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="8" Grid.Row="3" Margin="2"><Button Content="Co" Classes="periodic-atom" Tag="Co" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="9" Grid.Row="3" Margin="2"><Button Content="Ni" Classes="periodic-atom" Tag="Ni" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="10" Grid.Row="3" Margin="2"><Button Content="Cu" Classes="periodic-atom" Tag="Cu" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="11" Grid.Row="3" Margin="2"><Button Content="Zn" Classes="periodic-atom" Tag="Zn" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="12" Grid.Row="3" Margin="2"><Button Content="Ga" Classes="periodic-atom" Tag="Ga" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="13" Grid.Row="3" Margin="2"><Button Content="Ge" Classes="periodic-atom" Tag="Ge" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="14" Grid.Row="3" Margin="2"><Button Content="As" Classes="periodic-atom" Tag="As" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="15" Grid.Row="3" Margin="2"><Button Content="Se" Classes="periodic-atom" Tag="Se" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="16" Grid.Row="3" Margin="2"><Button Content="Br" Classes="periodic-atom" Tag="Br" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="17" Grid.Row="3" Margin="2"><Button Content="Kr" Classes="periodic-atom" Tag="Kr" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="0" Grid.Row="3" Margin="2"><Button Content="K" Classes="periodic-atom" Tag="K" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="3" Margin="2"><Button Content="Ca" Classes="periodic-atom" Tag="Ca" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="2" Grid.Row="3" Margin="2"><Button Content="Sc" Classes="periodic-atom" Tag="Sc" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="3" Grid.Row="3" Margin="2"><Button Content="Ti" Classes="periodic-atom" Tag="Ti" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="4" Grid.Row="3" Margin="2"><Button Content="V" Classes="periodic-atom" Tag="V" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="5" Grid.Row="3" Margin="2"><Button Content="Cr" Classes="periodic-atom" Tag="Cr" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="6" Grid.Row="3" Margin="2"><Button Content="Mn" Classes="periodic-atom" Tag="Mn" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="7" Grid.Row="3" Margin="2"><Button Content="Fe" Classes="periodic-atom" Tag="Fe" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="8" Grid.Row="3" Margin="2"><Button Content="Co" Classes="periodic-atom" Tag="Co" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="9" Grid.Row="3" Margin="2"><Button Content="Ni" Classes="periodic-atom" Tag="Ni" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="10" Grid.Row="3" Margin="2"><Button Content="Cu" Classes="periodic-atom" Tag="Cu" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="11" Grid.Row="3" Margin="2"><Button Content="Zn" Classes="periodic-atom" Tag="Zn" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="12" Grid.Row="3" Margin="2"><Button Content="Ga" Classes="periodic-atom" Tag="Ga" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="13" Grid.Row="3" Margin="2"><Button Content="Ge" Classes="periodic-atom" Tag="Ge" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="14" Grid.Row="3" Margin="2"><Button Content="As" Classes="periodic-atom" Tag="As" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="15" Grid.Row="3" Margin="2"><Button Content="Se" Classes="periodic-atom" Tag="Se" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="16" Grid.Row="3" Margin="2"><Button Content="Br" Classes="periodic-atom" Tag="Br" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="17" Grid.Row="3" Margin="2"><Button Content="Kr" Classes="periodic-atom" Tag="Kr" Click="AtomOption_Click"/></Viewbox>
 
-        <!-- 5. SOR: Rb, Sr, Y, Zr, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe -->
-        <Viewbox Grid.Column="0" Grid.Row="4" Margin="2"><Button Content="Rb" Classes="periodic-atom" Tag="Rb" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="1" Grid.Row="4" Margin="2"><Button Content="Sr" Classes="periodic-atom" Tag="Sr" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="2" Grid.Row="4" Margin="2"><Button Content="Y" Classes="periodic-atom" Tag="Y" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="3" Grid.Row="4" Margin="2"><Button Content="Zr" Classes="periodic-atom" Tag="Zr" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="4" Grid.Row="4" Margin="2"><Button Content="Nb" Classes="periodic-atom" Tag="Nb" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="5" Grid.Row="4" Margin="2"><Button Content="Mo" Classes="periodic-atom" Tag="Mo" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="6" Grid.Row="4" Margin="2"><Button Content="Tc" Classes="periodic-atom" Tag="Tc" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="7" Grid.Row="4" Margin="2"><Button Content="Ru" Classes="periodic-atom" Tag="Ru" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="8" Grid.Row="4" Margin="2"><Button Content="Rh" Classes="periodic-atom" Tag="Rh" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="9" Grid.Row="4" Margin="2"><Button Content="Pd" Classes="periodic-atom" Tag="Pd" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="10" Grid.Row="4" Margin="2"><Button Content="Ag" Classes="periodic-atom" Tag="Ag" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="11" Grid.Row="4" Margin="2"><Button Content="Cd" Classes="periodic-atom" Tag="Cd" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="12" Grid.Row="4" Margin="2"><Button Content="In" Classes="periodic-atom" Tag="In" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="13" Grid.Row="4" Margin="2"><Button Content="Sn" Classes="periodic-atom" Tag="Sn" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="14" Grid.Row="4" Margin="2"><Button Content="Sb" Classes="periodic-atom" Tag="Sb" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="15" Grid.Row="4" Margin="2"><Button Content="Te" Classes="periodic-atom" Tag="Te" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="16" Grid.Row="4" Margin="2"><Button Content="I" Classes="periodic-atom" Tag="I" Click="AtomOption_Click"/></Viewbox>
-        <Viewbox Grid.Column="17" Grid.Row="4" Margin="2"><Button Content="Xe" Classes="periodic-atom" Tag="Xe" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="0" Grid.Row="4" Margin="2"><Button Content="Rb" Classes="periodic-atom" Tag="Rb" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="4" Margin="2"><Button Content="Sr" Classes="periodic-atom" Tag="Sr" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="2" Grid.Row="4" Margin="2"><Button Content="Y" Classes="periodic-atom" Tag="Y" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="3" Grid.Row="4" Margin="2"><Button Content="Zr" Classes="periodic-atom" Tag="Zr" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="4" Grid.Row="4" Margin="2"><Button Content="Nb" Classes="periodic-atom" Tag="Nb" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="5" Grid.Row="4" Margin="2"><Button Content="Mo" Classes="periodic-atom" Tag="Mo" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="6" Grid.Row="4" Margin="2"><Button Content="Tc" Classes="periodic-atom" Tag="Tc" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="7" Grid.Row="4" Margin="2"><Button Content="Ru" Classes="periodic-atom" Tag="Ru" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="8" Grid.Row="4" Margin="2"><Button Content="Rh" Classes="periodic-atom" Tag="Rh" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="9" Grid.Row="4" Margin="2"><Button Content="Pd" Classes="periodic-atom" Tag="Pd" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="10" Grid.Row="4" Margin="2"><Button Content="Ag" Classes="periodic-atom" Tag="Ag" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="11" Grid.Row="4" Margin="2"><Button Content="Cd" Classes="periodic-atom" Tag="Cd" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="12" Grid.Row="4" Margin="2"><Button Content="In" Classes="periodic-atom" Tag="In" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="13" Grid.Row="4" Margin="2"><Button Content="Sn" Classes="periodic-atom" Tag="Sn" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="14" Grid.Row="4" Margin="2"><Button Content="Sb" Classes="periodic-atom" Tag="Sb" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="15" Grid.Row="4" Margin="2"><Button Content="Te" Classes="periodic-atom" Tag="Te" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="16" Grid.Row="4" Margin="2"><Button Content="I" Classes="periodic-atom" Tag="I" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="17" Grid.Row="4" Margin="2"><Button Content="Xe" Classes="periodic-atom" Tag="Xe" Click="AtomOption_Click"/></Viewbox>
             </Grid>
         </Border>
 
@@ -207,7 +202,6 @@
 
             </Grid>
         </Border>
-
     </Grid>
 
 </Window>
