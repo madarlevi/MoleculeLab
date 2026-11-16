@@ -31,17 +31,122 @@
         <Style Selector="TextBlock.primary">
             <Setter Property="Foreground" Value="#151515" />
         </Style>
+        <Style Selector="Button.periodic-atom">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="#faf1de" />
+        <Setter Property="BorderBrush" Value="#ebbe65" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Width" Value="45" />
+        <Setter Property="Height" Value="45" />
+    </Style>
+    <Style Selector="Button.periodic-atom:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="#252525" />
+        <Setter Property="BorderBrush" Value="#ebb752" />
+        <Setter Property="Foreground" Value="#ebb752" />
+    </Style>
+
+   
+    <Style Selector="Button.canvas-atom">
+        <Setter Property="Background" Value="#faf1de" />
+        <Setter Property="Foreground" Value="#151515" />
+        <Setter Property="BorderBrush" Value="#ebbe65" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="Width" Value="36" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style Selector="Button.canvas-atom:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="#ebbe65" />
+        <Setter Property="Foreground" Value="#151515" />
+    </Style>
+    <Style Selector="Button.canvas-atom:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="#ebbe65" />
+        <Setter Property="Foreground" Value="#151515" />
+    </Style>
     </Window.Styles>
 
-    <Grid x:Name="MainGrid" RowDefinitions="0, *">
-        <Border Grid.Row="0"
-                Background="#151515"
-                Padding="12">
-            <!--<TextBlock Text="MoleculeLab"
-                       FontSize="24"
-                       FontWeight="Bold"
-                       Foreground="#faf1de"/>
-                       -->
+    <Grid x:Name="MainGrid" RowDefinitions="300, *">
+        <Border Grid.Row="0" Background="#151515" Padding="8">
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*"
+                  RowDefinitions="*,*,*,*,*">
+
+                <!-- 1. SOR -->
+                <Viewbox Grid.Column="0" Grid.Row="0" Margin="2"><Button Content="H" Classes="periodic-atom" Tag="H" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="17" Grid.Row="0" Margin="2"><Button Content="He" Classes="periodic-atom" Tag="He" Click="AtomOption_Click"/></Viewbox>
+
+                <!-- 2. SOR -->
+                <Viewbox Grid.Column="0" Grid.Row="1" Margin="2"><Button Content="Li" Classes="periodic-atom" Tag="Li" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="1" Margin="2"><Button Content="Be" Classes="periodic-atom" Tag="Be" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="12" Grid.Row="1" Margin="2"><Button Content="B" Classes="periodic-atom" Tag="B" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="13" Grid.Row="1" Margin="2"><Button Content="C" Classes="periodic-atom" Tag="C" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="14" Grid.Row="1" Margin="2"><Button Content="N" Classes="periodic-atom" Tag="N" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="15" Grid.Row="1" Margin="2"><Button Content="O" Classes="periodic-atom" Tag="O" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="16" Grid.Row="1" Margin="2"><Button Content="F" Classes="periodic-atom" Tag="F" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="17" Grid.Row="1" Margin="2"><Button Content="Ne" Classes="periodic-atom" Tag="Ne" Click="AtomOption_Click"/></Viewbox>
+
+                <!-- 3. SOR -->
+                <Viewbox Grid.Column="0" Grid.Row="2" Margin="2"><Button Content="Na" Classes="periodic-atom" Tag="Na" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="2" Margin="2"><Button Content="Mg" Classes="periodic-atom" Tag="Mg" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="12" Grid.Row="2" Margin="2"><Button Content="Al" Classes="periodic-atom" Tag="Al" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="13" Grid.Row="2" Margin="2"><Button Content="Si" Classes="periodic-atom" Tag="Si" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="14" Grid.Row="2" Margin="2"><Button Content="P" Classes="periodic-atom" Tag="P" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="15" Grid.Row="2" Margin="2"><Button Content="S" Classes="periodic-atom" Tag="S" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="16" Grid.Row="2" Margin="2"><Button Content="Cl" Classes="periodic-atom" Tag="Cl" Click="AtomOption_Click"/></Viewbox>
+                <Viewbox Grid.Column="17" Grid.Row="2" Margin="2"><Button Content="Ar" Classes="periodic-atom" Tag="Ar" Click="AtomOption_Click"/></Viewbox>
+
+                <!-- 4. SOR: K, Ca, Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Ga, Ge, As, Se, Br, Kr -->
+        <Viewbox Grid.Column="0" Grid.Row="3" Margin="2"><Button Content="K" Classes="periodic-atom" Tag="K" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="1" Grid.Row="3" Margin="2"><Button Content="Ca" Classes="periodic-atom" Tag="Ca" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="2" Grid.Row="3" Margin="2"><Button Content="Sc" Classes="periodic-atom" Tag="Sc" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="3" Grid.Row="3" Margin="2"><Button Content="Ti" Classes="periodic-atom" Tag="Ti" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="4" Grid.Row="3" Margin="2"><Button Content="V" Classes="periodic-atom" Tag="V" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="5" Grid.Row="3" Margin="2"><Button Content="Cr" Classes="periodic-atom" Tag="Cr" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="6" Grid.Row="3" Margin="2"><Button Content="Mn" Classes="periodic-atom" Tag="Mn" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="7" Grid.Row="3" Margin="2"><Button Content="Fe" Classes="periodic-atom" Tag="Fe" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="8" Grid.Row="3" Margin="2"><Button Content="Co" Classes="periodic-atom" Tag="Co" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="9" Grid.Row="3" Margin="2"><Button Content="Ni" Classes="periodic-atom" Tag="Ni" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="10" Grid.Row="3" Margin="2"><Button Content="Cu" Classes="periodic-atom" Tag="Cu" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="11" Grid.Row="3" Margin="2"><Button Content="Zn" Classes="periodic-atom" Tag="Zn" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="12" Grid.Row="3" Margin="2"><Button Content="Ga" Classes="periodic-atom" Tag="Ga" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="13" Grid.Row="3" Margin="2"><Button Content="Ge" Classes="periodic-atom" Tag="Ge" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="14" Grid.Row="3" Margin="2"><Button Content="As" Classes="periodic-atom" Tag="As" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="15" Grid.Row="3" Margin="2"><Button Content="Se" Classes="periodic-atom" Tag="Se" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="16" Grid.Row="3" Margin="2"><Button Content="Br" Classes="periodic-atom" Tag="Br" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="17" Grid.Row="3" Margin="2"><Button Content="Kr" Classes="periodic-atom" Tag="Kr" Click="AtomOption_Click"/></Viewbox>
+
+        <!-- 5. SOR: Rb, Sr, Y, Zr, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, In, Sn, Sb, Te, I, Xe -->
+        <Viewbox Grid.Column="0" Grid.Row="4" Margin="2"><Button Content="Rb" Classes="periodic-atom" Tag="Rb" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="1" Grid.Row="4" Margin="2"><Button Content="Sr" Classes="periodic-atom" Tag="Sr" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="2" Grid.Row="4" Margin="2"><Button Content="Y" Classes="periodic-atom" Tag="Y" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="3" Grid.Row="4" Margin="2"><Button Content="Zr" Classes="periodic-atom" Tag="Zr" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="4" Grid.Row="4" Margin="2"><Button Content="Nb" Classes="periodic-atom" Tag="Nb" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="5" Grid.Row="4" Margin="2"><Button Content="Mo" Classes="periodic-atom" Tag="Mo" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="6" Grid.Row="4" Margin="2"><Button Content="Tc" Classes="periodic-atom" Tag="Tc" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="7" Grid.Row="4" Margin="2"><Button Content="Ru" Classes="periodic-atom" Tag="Ru" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="8" Grid.Row="4" Margin="2"><Button Content="Rh" Classes="periodic-atom" Tag="Rh" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="9" Grid.Row="4" Margin="2"><Button Content="Pd" Classes="periodic-atom" Tag="Pd" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="10" Grid.Row="4" Margin="2"><Button Content="Ag" Classes="periodic-atom" Tag="Ag" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="11" Grid.Row="4" Margin="2"><Button Content="Cd" Classes="periodic-atom" Tag="Cd" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="12" Grid.Row="4" Margin="2"><Button Content="In" Classes="periodic-atom" Tag="In" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="13" Grid.Row="4" Margin="2"><Button Content="Sn" Classes="periodic-atom" Tag="Sn" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="14" Grid.Row="4" Margin="2"><Button Content="Sb" Classes="periodic-atom" Tag="Sb" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="15" Grid.Row="4" Margin="2"><Button Content="Te" Classes="periodic-atom" Tag="Te" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="16" Grid.Row="4" Margin="2"><Button Content="I" Classes="periodic-atom" Tag="I" Click="AtomOption_Click"/></Viewbox>
+        <Viewbox Grid.Column="17" Grid.Row="4" Margin="2"><Button Content="Xe" Classes="periodic-atom" Tag="Xe" Click="AtomOption_Click"/></Viewbox>
+            </Grid>
         </Border>
 
         <Border Grid.Row="1">
@@ -56,24 +161,32 @@
                                    FontSize="20"
                                    FontWeight="Bold"
                                    />
-
-                        <Button Classes="primary" Content="Select" Width="100"/>
-                        <Button Classes="primary" Content="Move" Width="100"/>
-                        <Button Classes="primary" Content="Single Bond" Width="100"/>
-                        <Button Classes="primary" Content="Double Bond" Width="100"/>
-                        <Button Classes="primary" Content="Triple Bond" Width="100"/>
+                        <Button Classes="primary" Content="Select" Width="100" Tag="Select" Click="ToolButton_Click"/>
+                        <Button Classes="primary" Content="Delete" Width="100" Tag="Delete" Click="ToolButton_Click"/>
+                        <Button Classes="primary" Content="Single Bond" Width="100" Tag="SingleBond" Click="ToolButton_Click"/>
+                        <Button Classes="primary" Content="Double Bond" Width="100" Tag="DoubleBond" Click="ToolButton_Click"/>
+                        <Button Classes="primary" Content="Triple Bond" Width="100" Tag="TripleBond" Click="ToolButton_Click"/>
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="1"
-                        Background="#faf1de">
-                    <StackPanel Spacing="40">
-                    <Button x:Name="OpenPeriodicTable" Click="OpenPeriodicTable_Click" Classes="primary" Width="30" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top"><PathIcon Data="{StaticResource DropdownIcon}"/></Button>
-                <TextBlock x:Name="MoleculeCanvasText" Text="Molecule Canvas"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                    </StackPanel>
-                    </Border>
+                <Border Grid.Column="1" Background="#faf1de">
+                    <Grid>
+                        <Button x:Name="OpenPeriodicTable" Click="OpenPeriodicTable_Click" Classes="primary" Width="30" 
+                                HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" ZIndex="10">
+                            <PathIcon Data="{StaticResource DropdownIcon}"/>
+                        </Button>
+
+                        <Canvas x:Name="MoleculeCanvas" 
+                                Background="Transparent"
+                                Margin="0,40,0,0">
+                    
+                            <TextBlock x:Name="MoleculeCanvasText" Text="Molecule Canvas"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Canvas.Left="350" Canvas.Top="320"/>
+                        </Canvas>
+                    </Grid>
+                </Border>
 
                 <Border Grid.Column="2"
                         Background="#fcd586"
