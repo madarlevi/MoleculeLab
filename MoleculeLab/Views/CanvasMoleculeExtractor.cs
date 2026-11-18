@@ -16,6 +16,7 @@ public class CanvasBondInfo
 {
     public Button Atom1Button { get; set; } = null!;
     public Button Atom2Button { get; set; } = null!;
+    public string BondType { get; set; } = "SingleBond";
 }
 
 public static class CanvasMoleculeExtractor
@@ -23,7 +24,7 @@ public static class CanvasMoleculeExtractor
     public static (List<CanvasAtomInfo> Atoms, List<CanvasBondInfo> Bonds) ExtractFromCanvas(Canvas canvas)
     {
         var atoms = new List<CanvasAtomInfo>();
-        var bonds = new List<CanvasBondInfo>();
+        var rawBondCounts = new Dictionary<(Button, Button), int>();
 
         foreach (var child in canvas.Children)
         {
@@ -41,21 +42,37 @@ public static class CanvasMoleculeExtractor
                     Y = y
                 });
             }
+            else if (child is Line line && line.Tag is Button[] connectedAtoms && connectedAtoms.Length == 2)
+            {
+                var a1 = connectedAtoms[0];
+                var a2 = connectedAtoms[1];
+
+                var pair = a1.GetHashCode() < a2.GetHashCode() ? (a1, a2) : (a2, a1);
+
+                if (!rawBondCounts.ContainsKey(pair))
+                {
+                    rawBondCounts[pair] = 0;
+                }
+                rawBondCounts[pair]++;
+            }
         }
 
-        foreach (var child in canvas.Children)
+        var bonds = new List<CanvasBondInfo>();
+        foreach (var kvp in rawBondCounts)
         {
-            if (child is Line line && line.Tag is Button[] connectedAtoms)
+            string bondType = kvp.Value switch
             {
-                if (connectedAtoms.Length == 2)
-                {
-                    bonds.Add(new CanvasBondInfo
-                    {
-                        Atom1Button = connectedAtoms[0],
-                        Atom2Button = connectedAtoms[1]
-                    });
-                }
-            }
+                3 => "TripleBond",
+                2 => "DoubleBond",
+                _ => "SingleBond"
+            };
+
+            bonds.Add(new CanvasBondInfo
+            {
+                Atom1Button = kvp.Key.Item1,
+                Atom2Button = kvp.Key.Item2,
+                BondType = bondType
+            });
         }
 
         return (atoms, bonds);

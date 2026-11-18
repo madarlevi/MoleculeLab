@@ -191,7 +191,7 @@
 
                         <TextBlock Classes="primary" Text="Selected molecule:"/>
                         <TextBlock Classes="primary" x:Name="TxtMoleculeFormula" Text="Nincs kiválasztva" FontWeight="Bold"/>
-
+                        <TextBlock Classes="primary" x:Name="TxtMoleculeName" Text="Name: -" FontStyle="Italic"/>
                         <TextBlock Classes="primary" x:Name="TxtMoleculeMass" Text="Molecular mass: -"/>
                         <TextBlock Classes="primary" x:Name="TxtMoleculeStatus" Text="Status: -"/>
                         </StackPanel>

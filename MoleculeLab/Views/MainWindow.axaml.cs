@@ -6,6 +6,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace MoleculeLab.Views;
@@ -379,7 +380,28 @@ public partial class MainWindow : Window
 
         var independentMolecules = MolecularGraphBuilder.BuildIndependentMolecules(atoms, bonds);
 
-        Title = $"MoleculeLab - Érzékelt atomok: {atoms.Count}, Kötések: {bonds.Count}";
+        double startX = 200;
+        double startY = 200;
+
+        foreach (var mol in independentMolecules)
+        {
+            MoleculeLayoutEngine.ArrangeMolecule(mol, startX, startY);
+            startX += 250;
+        }
+
+        var linesToRemove = MoleculeCanvas.Children.OfType<Line>().ToList();
+        foreach (var line in linesToRemove)
+        {
+            MoleculeCanvas.Children.Remove(line);
+        }
+
+        foreach (var bond in bonds)
+        {
+            CreateBonds(bond.Atom1Button, bond.Atom2Button, bond.BondType);
+            Debug.WriteLine($"Bond: {bond.Atom1Button.Content}-{bond.Atom2Button.Content}, Type: {bond.BondType}");
+        }
+
+        Title = $"MoleculeLab - Elrendezve! Molekulák száma: {independentMolecules.Count}";
     }
 
     public void OnAtomSelected(Button clickedAtomButton)
@@ -400,9 +422,10 @@ public partial class MainWindow : Window
 
         if (targetMolecule != null)
         {
-            var (formula, mass, isStable) = MoleculeAnalyzer.Analyze(targetMolecule);
+            var (formula, name, mass, isStable) = MoleculeAnalyzer.Analyze(targetMolecule);
 
             TxtMoleculeFormula.Text = $"Formula: {formula}";
+            TxtMoleculeName.Text = $"Name: {name}";
             TxtMoleculeMass.Text = $"Molecular mass: {mass:F3} g/mol";
             TxtMoleculeStatus.Text = isStable ? "Status: Stable ✓" : "Status: Unstable / Invalid ⚠";
         }

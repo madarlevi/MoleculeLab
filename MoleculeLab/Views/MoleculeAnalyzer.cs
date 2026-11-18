@@ -35,7 +35,21 @@ public class MoleculeAnalyzer
         { "Fe", 2 }, { "Co", 2 }, { "Ni", 2 }, { "Cu", 2 }, { "Mn", 2 }, { "Cr", 2 }, { "Mo", 6 }, { "Ru", 3 }, { "Rh", 3 }, { "Pd", 2 }, { "Ag", 1 }
     };
 
-    public static (string Formula, double TotalMass, bool IsStable) Analyze(List<GraphNode> moleculeNodes)
+    private static readonly Dictionary<string, string> CommonNames = new()
+    {
+        { "H2O", "Water" },
+        { "CO2", "Carbon dioxide" },
+        { "CH4", "Methane" },
+        { "C2H6", "Ethane" },
+        { "C3H8", "Propane" },
+        { "C4H10", "Butane" },
+        { "NH3", "Ammonia" },
+        { "O2", "Oxygen gas" },
+        { "N2", "Nitrogen gas" },
+        { "NaCl", "Sodium chloride (Salt)" },
+        { "HCl", "Hydrochloric acid" }
+    };
+    public static (string Formula, string Name, double TotalMass, bool IsStable) Analyze(List<GraphNode> moleculeNodes)
     {
         var elementCounts = new Dictionary<string, int>();
         double totalMass = 0;
@@ -56,7 +70,7 @@ public class MoleculeAnalyzer
             int actualBonds = node.Neighbors.Sum(n => n.BondType);
             if (ExpectedValencies.TryGetValue(node.Symbol, out int expected))
             {
-                if (expected > 0 && actualBonds != expected && !IsTransitionMetal(node.Symbol))
+                if (actualBonds != expected && !IsTransitionMetal(node.Symbol))
                 {
                     isStable = false;
                 }
@@ -64,13 +78,29 @@ public class MoleculeAnalyzer
         }
 
         string formula = "";
+        if (elementCounts.ContainsKey("C"))
+        {
+            formula += "C";
+            if (elementCounts["C"] > 1) formula += elementCounts["C"];
+            elementCounts.Remove("C");
+
+            if (elementCounts.ContainsKey("H"))
+            {
+                formula += "H";
+                if (elementCounts["H"] > 1) formula += elementCounts["H"];
+                elementCounts.Remove("H");
+            }
+        }
+
         foreach (var pair in elementCounts.OrderBy(p => p.Key))
         {
             formula += pair.Key;
             if (pair.Value > 1) formula += pair.Value;
         }
 
-        return (formula, totalMass, isStable);
+        string name = CommonNames.ContainsKey(formula) ? CommonNames[formula] : "Unknown Compound";
+
+        return (formula, name, totalMass, isStable);
     }
 
     private static bool IsTransitionMetal(string symbol)

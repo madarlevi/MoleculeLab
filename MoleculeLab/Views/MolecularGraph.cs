@@ -38,8 +38,15 @@ public static class MolecularGraphBuilder
                 var node1 = nodeMap[bond.Atom1Button];
                 var node2 = nodeMap[bond.Atom2Button];
 
-                node1.Neighbors.Add((node2, 1));
-                node2.Neighbors.Add((node1, 1));
+                int bondValue = bond.BondType switch
+                {
+                    "DoubleBond" => 2,
+                    "TripleBond" => 3,
+                    _ => 1
+                };
+
+                node1.Neighbors.Add((node2, bondValue));
+                node2.Neighbors.Add((node1, bondValue));
             }
         }
 
