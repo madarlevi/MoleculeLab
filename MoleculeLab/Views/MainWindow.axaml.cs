@@ -14,6 +14,8 @@ public partial class MainWindow : Window
 {
     bool TableOpen = true;
 
+    bool animationInProgress = false;
+
     string _activeTool = "Select";
 
     Button? _selectedPeriodicButton = null;
@@ -81,52 +83,57 @@ public partial class MainWindow : Window
             _selectedAtomSymbol = symbol;
             btn.Background = Brushes.LightBlue;
 
-            _activeTool = "Select";
+            if (_activeTool != "Select" && _activeTool != "Move")
+            {
+                _activeTool = "Select";
+            }
         }
     }
 
     private void MoleculeCanvas_PointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (_activeTool == "Select")
+        var point = e.GetCurrentPoint(MoleculeCanvas);
+        if (!point.Properties.IsLeftButtonPressed) return;
+
+        if (e.Source is Canvas || e.Source == MoleculeCanvas)
         {
-            var point = e.GetCurrentPoint(MoleculeCanvas);
-            if (!point.Properties.IsLeftButtonPressed) return;
+            var pos = point.Position;
+            double atomSize = 36;
+            double targetX = pos.X - (atomSize / 2);
+            double targetY = pos.Y - (atomSize / 2);
 
-            if (e.Source is Canvas || e.Source == MoleculeCanvas)
+            if (_activeTool == "Move" && _selectedCanvasAtom != null)
             {
-                var pos = point.Position;
-                double atomSize = 36;
-                double targetX = pos.X - (atomSize / 2);
-                double targetY = pos.Y - (atomSize / 2);
-
-                if (_selectedCanvasAtom != null)
+                if (CheckCollision(targetX, targetY, atomSize, _selectedCanvasAtom))
                 {
-                    if (CheckCollision(targetX, targetY, atomSize, _selectedCanvasAtom))
-                    {
-                        return;
-                    }
-
-                    string symbol = _selectedCanvasAtom.Content?.ToString() ?? "C";
-                    MoveAtomTo(_selectedCanvasAtom, targetX, targetY, symbol);
-
-                    _selectedCanvasAtom.Background = null;
-                    _selectedCanvasAtom = null;
-                    e.Handled = true;
                     return;
                 }
 
-                if (_selectedAtomSymbol != null)
+                string symbol = _selectedCanvasAtom.Content?.ToString() ?? "C";
+                MoveAtomTo(_selectedCanvasAtom, targetX, targetY, symbol);
+
+                _selectedCanvasAtom.Background = null;
+                _selectedCanvasAtom = null;
+                e.Handled = true;
+                return;
+            }
+
+            if (_selectedAtomSymbol != null && (_activeTool == "Select" || _activeTool == "Move"))
+            {
+                if (CheckCollision(targetX, targetY, atomSize, null))
                 {
-                    if (CheckCollision(targetX, targetY, atomSize, null))
-                    {
-                        return;
-                    }
-
-                    CreateCanvasAtom(_selectedAtomSymbol, targetX, targetY);
-
-                    e.Handled = true;
                     return;
                 }
+
+                CreateCanvasAtom(_selectedAtomSymbol, targetX, targetY);
+
+                e.Handled = true;
+                return;
+            }
+
+            if (_activeTool == "Select")
+            {
+                ResetSelection();
             }
         }
     }
@@ -178,11 +185,6 @@ public partial class MainWindow : Window
         atomButton.Click += AtomOnClicked;
 
         MoleculeCanvas.Children.Add(atomButton);
-
-        if (MoleculeCanvasText != null)
-        {
-            MoleculeCanvasText.IsVisible = false;
-        }
     }
 
     private void AtomOnClicked(object? sender, RoutedEventArgs e)
@@ -221,6 +223,16 @@ public partial class MainWindow : Window
 
             if (_activeTool == "Select")
             {
+                OnAtomSelected(atom);
+
+                if (_selectedCanvasAtom != null) _selectedCanvasAtom.Background = null;
+                _selectedCanvasAtom = atom;
+                atom.Background = Brushes.LightBlue;
+                return;
+            }
+
+            if (_activeTool == "Move")
+            {
                 if (_selectedCanvasAtom == atom)
                 {
                     atom.Background = null;
@@ -229,16 +241,8 @@ public partial class MainWindow : Window
                 else
                 {
                     if (_selectedCanvasAtom != null) _selectedCanvasAtom.Background = null;
-
-                    if (_selectedPeriodicButton != null)
-                    {
-                        _selectedPeriodicButton.Background = Brushes.Transparent;
-                        _selectedPeriodicButton = null;
-                        _selectedAtomSymbol = null;
-                    }
-
                     _selectedCanvasAtom = atom;
-                    atom.Background = Brushes.LightBlue;
+                    atom.Background = Brushes.Orange;
                 }
                 return;
             }
@@ -344,4 +348,63 @@ public partial class MainWindow : Window
         MoleculeCanvas.Children.Insert(0, line);
     }
 
+    private void StartStopButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (animationInProgress)
+        {
+            animationInProgress = false;
+            StartStopButton.Content = "Start";
+            Title = "MoleculeLab - Szimuláció leállítva";
+        }
+        else
+        {
+            animationInProgress = true;
+            StartStopButton.Content = "Stop";
+            Title = "MoleculeLab - Szimuláció fut...";
+
+            RunSimulationStep();
+        }
+    }
+    private void RunSimulationStep()
+    {
+        var (atoms, bonds) = CanvasMoleculeExtractor.ExtractFromCanvas(MoleculeCanvas);
+
+        if (atoms.Count == 0)
+        {
+            Title = "MoleculeLab - Nincsenek atomok a vásznon!";
+            animationInProgress = false;
+            StartStopButton.Content = "Start";
+            return;
+        }
+
+        var independentMolecules = MolecularGraphBuilder.BuildIndependentMolecules(atoms, bonds);
+
+        Title = $"MoleculeLab - Érzékelt atomok: {atoms.Count}, Kötések: {bonds.Count}";
+    }
+
+    public void OnAtomSelected(Button clickedAtomButton)
+    {
+        var (canvasAtoms, canvasBonds) = CanvasMoleculeExtractor.ExtractFromCanvas(MoleculeCanvas);
+
+        var independentMolecules = MolecularGraphBuilder.BuildIndependentMolecules(canvasAtoms, canvasBonds);
+
+        List<GraphNode>? targetMolecule = null;
+        foreach (var mol in independentMolecules)
+        {
+            if (mol.Any(node => node.ButtonRef == clickedAtomButton))
+            {
+                targetMolecule = mol;
+                break;
+            }
+        }
+
+        if (targetMolecule != null)
+        {
+            var (formula, mass, isStable) = MoleculeAnalyzer.Analyze(targetMolecule);
+
+            TxtMoleculeFormula.Text = $"Formula: {formula}";
+            TxtMoleculeMass.Text = $"Molecular mass: {mass:F3} g/mol";
+            TxtMoleculeStatus.Text = isStable ? "Status: Stable ✓" : "Status: Unstable / Invalid ⚠";
+        }
+    }
 }

@@ -157,6 +157,7 @@
                                    FontWeight="Bold"
                                    />
                         <Button Classes="primary" Content="Select" Width="100" Tag="Select" Click="ToolButton_Click"/>
+                        <Button Classes="primary" Content="Move" Width="100" Tag="Move" Click="ToolButton_Click"/>
                         <Button Classes="primary" Content="Delete" Width="100" Tag="Delete" Click="ToolButton_Click"/>
                         <Button Classes="primary" Content="Single Bond" Width="100" Tag="SingleBond" Click="ToolButton_Click"/>
                         <Button Classes="primary" Content="Double Bond" Width="100" Tag="DoubleBond" Click="ToolButton_Click"/>
@@ -174,11 +175,6 @@
                         <Canvas x:Name="MoleculeCanvas" 
                                 Background="Transparent"
                                 Margin="0,40,0,0">
-                    
-                            <TextBlock x:Name="MoleculeCanvasText" Text="Molecule Canvas"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"
-                                       Canvas.Left="350" Canvas.Top="320"/>
                         </Canvas>
                     </Grid>
                 </Border>
@@ -187,17 +183,18 @@
                         Background="#fcd586"
                         Padding="12">
                     <StackPanel Spacing="10">
+                        <Button Classes="primary" Content="Start" x:Name="StartStopButton" Width="100" Click="StartStopButton_Click" Margin="0,0,0,10"/>
                         <TextBlock Classes="primary"
-                                   Text="PROPERTIES"
-                                   FontSize="20"
-                                   FontWeight="Bold"/>
+                            Text="MOLECULE PROPERTIES"
+                            FontSize="20"
+                            FontWeight="Bold"/>
 
-                        <TextBlock Classes="primary" Text="Selected atom:"/>
-                        <TextBlock Classes="primary" Text="Carbon (C)"/>
+                        <TextBlock Classes="primary" Text="Selected molecule:"/>
+                        <TextBlock Classes="primary" x:Name="TxtMoleculeFormula" Text="Nincs kiválasztva" FontWeight="Bold"/>
 
-                        <TextBlock Classes="primary" Text="Atomic number: 6"/>
-                        <TextBlock Classes="primary" Text="Atomic mass: 12.011"/>
-                    </StackPanel>
+                        <TextBlock Classes="primary" x:Name="TxtMoleculeMass" Text="Molecular mass: -"/>
+                        <TextBlock Classes="primary" x:Name="TxtMoleculeStatus" Text="Status: -"/>
+                        </StackPanel>
                 </Border>
 
             </Grid>
