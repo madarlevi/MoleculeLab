@@ -380,6 +380,23 @@ public partial class MainWindow : Window
 
         var independentMolecules = MolecularGraphBuilder.BuildIndependentMolecules(atoms, bonds);
 
+        bool allStable = true;
+        foreach (var mol in independentMolecules)
+        {
+            var analysis = MoleculeAnalyzer.Analyze(mol);
+            if (!analysis.IsStable)
+            {
+                allStable = false;
+                break;
+            }
+        }
+
+        if (!allStable)
+        {
+            Title = "MoleculeLab - Figyelem: A szimuláció megállt, mert instabil/érvénytelen molekula található a vásznon!";
+            return;
+        }
+
         double startX = 200;
         double startY = 200;
 
@@ -398,10 +415,9 @@ public partial class MainWindow : Window
         foreach (var bond in bonds)
         {
             CreateBonds(bond.Atom1Button, bond.Atom2Button, bond.BondType);
-            Debug.WriteLine($"Bond: {bond.Atom1Button.Content}-{bond.Atom2Button.Content}, Type: {bond.BondType}");
         }
 
-        Title = $"MoleculeLab - Elrendezve! Molekulák száma: {independentMolecules.Count}";
+        Title = $"MoleculeLab - Sikeres stabil szimuláció! Molekulák száma: {independentMolecules.Count}";
     }
 
     public void OnAtomSelected(Button clickedAtomButton)

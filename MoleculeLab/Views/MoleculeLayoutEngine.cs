@@ -37,11 +37,28 @@ public static class MoleculeLayoutEngine
 
                 for (int i = 0; i < count; i++)
                 {
-                    double angle = (i % 2 == 0) ? -Math.PI / 2 : Math.PI / 2;
-                    double offsetX = carbon.X + (count > 2 ? (i < 2 ? -15 : 15) : 0);
-                    double offsetY = carbon.Y + (i % 2 == 0 ? -BondLength : BondLength);
+                    double angle;
+                    if (count == 3)
+                    {
+                        angle = i switch
+                        {
+                            0 => -Math.PI / 2,
+                            1 => Math.PI / 2,
+                            _ => (carbon == carbonChain.First()) ? Math.PI : 0
+                        };
+                    }
+                    else if (count == 2)
+                    {
+                        angle = (i == 0) ? -Math.PI / 2 : Math.PI / 2;
+                    }
+                    else
+                    {
+                        angle = (i * 2 * Math.PI) / count;
+                    }
 
-                    SetNodePosition(nonCarbons[i], offsetX, offsetY);
+                    double hX = carbon.X + BondLength * 0.7 * Math.Cos(angle);
+                    double hY = carbon.Y + BondLength * 0.7 * Math.Sin(angle);
+                    SetNodePosition(nonCarbons[i], hX, hY);
                 }
             }
             return;
@@ -51,10 +68,16 @@ public static class MoleculeLayoutEngine
         SetNodePosition(centerNode, centerX, centerY);
 
         int neighborCount = centerNode.Neighbors.Count;
-        if (neighborCount == 2 && centerNode.Symbol == "O")
+        if (neighborCount == 2 && (centerNode.Symbol == "O" || centerNode.Symbol == "S"))
         {
-            SetNodePosition(centerNode.Neighbors[0].Neighbor, centerX - 45, centerY + 45);
-            SetNodePosition(centerNode.Neighbors[1].Neighbor, centerX + 45, centerY + 45);
+            SetNodePosition(centerNode.Neighbors[0].Neighbor, centerX - 45, centerY + 40);
+            SetNodePosition(centerNode.Neighbors[1].Neighbor, centerX + 45, centerY + 40);
+            return;
+        }
+        else if (neighborCount == 2 && centerNode.Symbol == "C")
+        {
+            SetNodePosition(centerNode.Neighbors[0].Neighbor, centerX - BondLength, centerY);
+            SetNodePosition(centerNode.Neighbors[1].Neighbor, centerX + BondLength, centerY);
             return;
         }
 

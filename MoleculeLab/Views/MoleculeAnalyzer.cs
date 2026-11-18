@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace MoleculeLab.Views;
 
@@ -35,20 +39,40 @@ public class MoleculeAnalyzer
         { "Fe", 2 }, { "Co", 2 }, { "Ni", 2 }, { "Cu", 2 }, { "Mn", 2 }, { "Cr", 2 }, { "Mo", 6 }, { "Ru", 3 }, { "Rh", 3 }, { "Pd", 2 }, { "Ag", 1 }
     };
 
-    private static readonly Dictionary<string, string> CommonNames = new()
+    private static Dictionary<string, string>? _commonNames;
+
+    private static Dictionary<string, string> CommonNames
     {
-        { "H2O", "Water" },
-        { "CO2", "Carbon dioxide" },
-        { "CH4", "Methane" },
-        { "C2H6", "Ethane" },
-        { "C3H8", "Propane" },
-        { "C4H10", "Butane" },
-        { "NH3", "Ammonia" },
-        { "O2", "Oxygen gas" },
-        { "N2", "Nitrogen gas" },
-        { "NaCl", "Sodium chloride (Salt)" },
-        { "HCl", "Hydrochloric acid" }
-    };
+        get
+        {
+            if (_commonNames != null) return _commonNames;
+
+            string filePath = Path.Combine(AppContext.BaseDirectory, "compounds.json");
+            if (File.Exists(filePath))
+            {
+                try
+                {
+                    string json = File.ReadAllText(filePath);
+                    _commonNames = JsonSerializer.Deserialize<Dictionary<string, string>>(json) ?? new();
+                    return _commonNames;
+                }
+                catch
+                {
+                    Debug.WriteLine("Error reading compounds.json. Falling back to default common names.");
+                }
+            }
+
+            _commonNames = new Dictionary<string, string>
+            {
+                { "H2O", "Water" },
+                { "CO2", "Carbon dioxide" },
+                { "CH4", "Methane" },
+                { "C3H8", "Propane" }
+            };
+            return _commonNames;
+        }
+    }
+
     public static (string Formula, string Name, double TotalMass, bool IsStable) Analyze(List<GraphNode> moleculeNodes)
     {
         var elementCounts = new Dictionary<string, int>();
@@ -59,8 +83,7 @@ public class MoleculeAnalyzer
         {
             if (elementCounts.ContainsKey(node.Symbol))
                 elementCounts[node.Symbol]++;
-            else
-                elementCounts[node.Symbol] = 1;
+            else elementCounts[node.Symbol] = 1;
 
             if (AtomicMasses.TryGetValue(node.Symbol, out double mass))
             {
@@ -98,7 +121,15 @@ public class MoleculeAnalyzer
             if (pair.Value > 1) formula += pair.Value;
         }
 
-        string name = CommonNames.ContainsKey(formula) ? CommonNames[formula] : "Unknown Compound";
+        string name = "-";
+        if (isStable && CommonNames.TryGetValue(formula, out string? foundName))
+        {
+            name = foundName;
+        }
+        else if (isStable)
+        {
+            name = "Complex Organic/Inorganic Compound";
+        }
 
         return (formula, name, totalMass, isStable);
     }
